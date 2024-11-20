@@ -44,3 +44,10 @@ They go on:
 - http://localhost:8000/docs
 - http://localhost:8000/
 - http://localhost:8000/examples
+
+## Developpement
+
+To setup the git hooks on linux use :
+```
+git/git-setup
+```

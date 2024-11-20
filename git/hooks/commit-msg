@@ -1,0 +1,21 @@
+#!/bin/sh
+
+pattern="^(feat|fix|perf|docs|style|refactor|test|build|ci|chore)(\(\w+\))?: .{1,50}(\n\n.*)?(\n\n.*)?$"
+merge_pattern="^Merge.*"
+revert_pattern="^Revert.*"
+commit_msg_file=$1
+commit_msg=$(cat "$commit_msg_file")
+
+if [[ ! $commit_msg =~ $pattern && ! $commit_msg =~ $merge_pattern ]]; then
+    echo "ERROR: Commit message does not follow the Karma Conventional Commit format."
+    echo -e "Example: 
+    feat(scope): add a new feature
+    
+    This feature allows to ...
+    
+    Closes #123"
+    echo "Allowed types: feat, fix, perf, docs, style, refactor, test, build"
+    echo "Merge commits are also accepted."
+    echo "Please refer to http://karma-runner.github.io/6.4/dev/git-commit-msg.html for more information."
+    exit 1
+fi
