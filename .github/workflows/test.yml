@@ -1,0 +1,36 @@
+name: Test Python App
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout the repository
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Step 2: Set up Python environment
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    # Step 3:
+    - name: Install uv
+      run: curl -LsSf https://astral.sh/uv/install.sh | sh
+
+    # Step 4: Install dependencies using uv
+    - name: Install dependencies
+      run: uv python install && uv sync
+
+    # Step 5: Run tests
+    - name: Run tests
+      run: uv run pytest tests/
