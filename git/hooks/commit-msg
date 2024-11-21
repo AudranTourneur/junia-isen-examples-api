@@ -1,10 +1,13 @@
 #!/bin/sh
 
+comment_extractor="#.*"
 pattern="^(feat|fix|perf|docs|style|refactor|test|build|ci|chore)(\(\w+\))?: .{1,50}(\n\n.*)?(\n\n.*)?$"
 merge_pattern="^Merge.*"
 revert_pattern="^Revert.*"
 commit_msg_file=$1
 commit_msg=$(cat "$commit_msg_file")
+
+commit_msg="${commit_msg//#*}"
 
 if [[ ! $commit_msg =~ $pattern && ! $commit_msg =~ $merge_pattern ]]; then
     echo "ERROR: Commit message does not follow the Karma Conventional Commit format."
