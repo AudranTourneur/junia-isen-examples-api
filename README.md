@@ -35,19 +35,20 @@ uv run fastapi dev examples/examples.py
 
 ## Run tests
 
-```
+```shell
 uv run pytest tests/
 ```
 
 They go on:
 
-- http://localhost:8000/docs
-- http://localhost:8000/
-- http://localhost:8000/examples
+- <http://localhost:8000/docs>
+- <http://localhost:8000/>
+- <http://localhost:8000/examples>
 
 ## Developpement
 
 To setup the git hooks on linux use :
-```
-git/git-setup
+
+```shell
+./git/git-setup
 ```
