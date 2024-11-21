@@ -1,6 +1,5 @@
 #!/bin/sh
 
-comment_extractor="#.*"
 pattern="^(feat|fix|perf|docs|style|refactor|test|build|ci|chore)(\(\w+\))?: .{1,50}(\n\n.*)?(\n\n.*)?$"
 merge_pattern="^Merge.*"
 revert_pattern="^Revert.*"
