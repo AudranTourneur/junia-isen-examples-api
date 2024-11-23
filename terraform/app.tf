@@ -17,5 +17,10 @@ resource "azurerm_linux_web_app" "example" {
   location            = azurerm_service_plan.example.location
   service_plan_id     = azurerm_service_plan.example.id
 
-  site_config {}
+  site_config {
+    application_stack {
+      docker_registry_url = "https://ghcr.io"
+      docker_image_name = "audrantourneur/junia-isen-examples-api/cloud-computing-app:latest"
+    }
+  }
 }
