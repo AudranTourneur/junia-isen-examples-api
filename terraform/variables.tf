@@ -27,3 +27,21 @@ variable "email_address" {
   nullable    = false
   description = "Your email address."
 }
+
+variable "database_name" {
+  type        = string
+  nullable    = false
+  description = "Your database name."
+}
+
+variable "database_username" {
+  type        = string
+  nullable    = false
+  description = "Your database admin username."
+}
+
+variable "database_password" {
+  type        = string
+  nullable    = false
+  description = "Your database admin password."
+}
