@@ -39,9 +39,13 @@ Moreover, on a UNIX-like system, you may run the following script to enforce the
 
 An automatic workflow has been setup to deploy the application whenever a commit hit the main branch. See `docker-build-and-publish.yml`.
 
-# Tests
+# Application tests
 
 A workflow has been setup to run Python tests on commits and pull requests targeting the main branch, see `test.yml`.
+
+# Terraform tests
+
+A test has been added to check that the application returns a HTTP 200 response when deployed. See the `infrastructure/tests` folder.
 
 # Application demo
 
@@ -66,4 +70,3 @@ This is coming from the Postgres database.
 ![route_quotes](images/route_quotes.png)
 
 This is coming from the Blob storage.
-
