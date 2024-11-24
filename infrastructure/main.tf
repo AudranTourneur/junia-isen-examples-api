@@ -45,6 +45,12 @@ module "app" {
   depends_on = [module.database, module.blob, azurerm_subnet.app, azurerm_subnet_network_security_group_association.app]
 }
 
+module "network" {
+  source              = "./modules/network"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.example.name
+}
+
 output "url" {
   description = "The deployed URL of the application"
   value       = module.app.url
