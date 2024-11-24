@@ -10,6 +10,11 @@ variable "password" {
     sensitive = true
 }
 
+variable "database" {
+    description = "The name of the Postgres database"
+    type = string
+}
+
 variable "location" {
     description = "The location to deploy the Postgres database"
     type = string

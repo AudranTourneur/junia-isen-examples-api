@@ -25,25 +25,33 @@ EOT
 variable "email_address" {
   type        = string
   nullable    = false
-  description = "Your email address."
+  description = "Your email address"
 }
 
 variable "database_name" {
   type        = string
   nullable    = false
-  description = "Your database name."
+  description = "Your database name"
+  default     = "appdb"
 }
 
 variable "database_username" {
   type        = string
   nullable    = false
   sensitive   = true
-  description = "Your database admin username."
+  description = "Your database admin username"
 }
 
 variable "database_password" {
   type        = string
   nullable    = false
   sensitive   = true
-  description = "Your database admin password."
+  description = "Your database admin password"
+}
+
+variable "database_port" {
+  type        = number
+  nullable    = false
+  description = "Your database port"
+  default     = 5432
 }

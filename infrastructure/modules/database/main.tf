@@ -24,7 +24,7 @@ resource "azurerm_postgresql_flexible_server" "main" {
 
 # A Flexible Postgres server may contain many databases, a single one is enough for our application
 resource "azurerm_postgresql_flexible_server_database" "main" {
-  name      = "app"
+  name      = var.database
   server_id = azurerm_postgresql_flexible_server.main.id
   collation = "en_US.utf8"
   charset   = "UTF8"
