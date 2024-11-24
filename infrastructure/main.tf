@@ -51,3 +51,20 @@ output "url" {
   description = "The deployed URL of the application"
   value       = module.app.url
 }
+
+output "app_publish_profile_name" {
+  description = "Publish profile name"
+  value       = module.app.publish_profile_name
+  sensitive = true
+}
+
+output "app_publish_profile_password" {
+  description = "Publish profile password"
+  value       = module.app.publish_profile_password
+  sensitive = true
+}
+
+output "app_name" {
+  description = "App name"
+  value       = module.app.name
+}
