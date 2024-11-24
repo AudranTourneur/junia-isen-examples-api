@@ -1,0 +1,5 @@
+database_username   = "username"
+database_password   = "password"
+email_address       = "youremail@example.com"
+subscription_id     = "00000000-00000000-00000000-00000000"
+resource_group_name = "YourCloudComputingProjectName"
