@@ -25,10 +25,12 @@ module "blob" {
   source              = "./modules/blob"
   location            = var.location
   resource_group_name = azurerm_resource_group.example.name
+  /*
   virtual_network_name = module.network.virtual_network_name
   network_security_group_id = module.network.network_security_group_id
   private_dns_zone_name = module.network.private_dns_zone_name
   private_dns_zone_id = module.network.private_dns_zone_id
+  */
 }
 
 module "app" {

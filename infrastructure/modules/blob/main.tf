@@ -30,7 +30,7 @@ resource "azurerm_storage_blob" "main" {
   source                 = "modules/blob/resources/quotes.json"
 }
 
-
+/* Tentative de configuration de la sécurité du stockage en passant par un subnet (echec)
 resource "azurerm_subnet" "blob" {
   name                 = "blob-service-subnet"
   resource_group_name  = var.resource_group_name
@@ -40,7 +40,6 @@ resource "azurerm_subnet" "blob" {
   service_endpoints = ["Microsoft.Storage"]
 }
 
-/* Tentative de configuration de la sécurité du stockage en passant par un subnet (echec)
 resource "azurerm_storage_account_network_rules" "main" {
   storage_account_id = azurerm_storage_account.main.id
 
