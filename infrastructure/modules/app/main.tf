@@ -3,12 +3,6 @@ resource "random_pet" "prefix" {
   length = 1
 }
 
-resource "random_string" "main" {
-  length  = 24
-  special = false
-  upper   = false
-}
-
 resource "azurerm_service_plan" "main" {
   name                = "${random_pet.prefix.id}-plan"
   resource_group_name = var.resource_group_name
