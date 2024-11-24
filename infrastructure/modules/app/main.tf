@@ -1,10 +1,5 @@
-resource "random_pet" "prefix" {
-  prefix = var.resource_group_name
-  length = 1
-}
-
 resource "azurerm_service_plan" "main" {
-  name                = "${random_pet.prefix.id}-plan"
+  name                = "${var.resource_group_name}-plan"
   resource_group_name = var.resource_group_name
   location            = var.location
   os_type             = "Linux"
@@ -12,7 +7,7 @@ resource "azurerm_service_plan" "main" {
 }
 
 resource "azurerm_linux_web_app" "main" {
-  name                          = "${random_pet.prefix.id}-app"
+  name                          = "${var.resource_group_name}-app"
   resource_group_name           = var.resource_group_name
   location                      = azurerm_service_plan.main.location
   service_plan_id               = azurerm_service_plan.main.id

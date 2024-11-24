@@ -2,7 +2,7 @@ data "azuread_user" "user" {
   user_principal_name = var.email_address
 }
 
-resource "azurerm_resource_group" "example" {
+resource "azurerm_resource_group" "main" {
   name     = var.resource_group_name
   location = var.location
 }
@@ -13,7 +13,7 @@ module "database" {
   password            = var.database_password
   database            = var.database_name
   location            = var.location
-  resource_group_name = azurerm_resource_group.example.name
+  resource_group_name = azurerm_resource_group.main.name
   private_dns_zone_id = module.network.private_dns_zone_id
   virtual_network_name = module.network.virtual_network_name
   network_security_group_id = module.network.network_security_group_id
@@ -24,7 +24,7 @@ module "database" {
 module "blob" {
   source              = "./modules/blob"
   location            = var.location
-  resource_group_name = azurerm_resource_group.example.name
+  resource_group_name = azurerm_resource_group.main.name
   /*
   virtual_network_name = module.network.virtual_network_name
   network_security_group_id = module.network.network_security_group_id
@@ -41,7 +41,7 @@ module "app" {
   database_password         = var.database_password
   database_name             = var.database_name
   database_port             = var.database_port
-  resource_group_name       = azurerm_resource_group.example.name
+  resource_group_name       = azurerm_resource_group.main.name
   storage_blob_url          = module.blob.url
   storage_account_id        = module.blob.storage_account_id
   virtual_network_name      = module.network.virtual_network_name
@@ -55,5 +55,5 @@ module "app" {
 module "network" {
   source              = "./modules/network"
   location            = var.location
-  resource_group_name = azurerm_resource_group.example.name
+  resource_group_name = azurerm_resource_group.main.name
 }
