@@ -26,7 +26,7 @@ module "database" {
 module "blob" {
   source              = "./modules/blob"
   location            = var.location
-  resource_group_name = var.resource_group_name
+  resource_group_name = azurerm_resource_group.example.name
 }
 
 module "app" {
@@ -37,7 +37,7 @@ module "app" {
   database_password         = var.database_password
   database_name             = var.database_name
   database_port             = var.database_port
-  resource_group_name       = var.resource_group_name
+  resource_group_name       = azurerm_resource_group.example.name
   storage_blob_url          = module.blob.url
   virtual_network_subnet_id = azurerm_subnet.app.id
 

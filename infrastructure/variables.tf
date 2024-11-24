@@ -6,8 +6,8 @@ variable "location" {
 
 variable "resource_group_name" {
   type        = string
-  default     = "project_resource_group"
-  description = "Name of the resource group in which all resource are grouped"
+  default     = "project-resource-group"
+  description = "Name of the resource group in which all resource are grouped. Use only alphanumeric and dashes."
 }
 
 variable "subscription_id" {
