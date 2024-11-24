@@ -11,33 +11,14 @@ resource "azurerm_storage_account" "main" {
   resource_group_name           = var.resource_group_name
   location                      = var.location
   account_tier                  = "Standard"
-  account_replication_type      = "LRS" # Locally redundant storage, the cheapest option
-  public_network_access_enabled = true
+  account_replication_type      = "LRS"
 }
-
-/* CA MARCHE PAAAAAAAAAAAAAAAAAAAAAAS
-
-
-resource "azurerm_storage_account_network_rules" "main" {
-  storage_account_id = azurerm_storage_account.main.id
-
-  default_action     = "Deny"
-  virtual_network_subnet_ids = [azurerm_subnet.blob.id]
-
-  depends_on = [
-    azurerm_storage_account.main,
-    azurerm_storage_blob.main,
-        azurerm_subnet.blob
-
-  ]
-}
-*/
 
 # A storage container is akin to a folder
 resource "azurerm_storage_container" "main" {
   name                  = "api" # Must precisely match what is defined in the Python application code
   storage_account_id    = azurerm_storage_account.main.id
-  container_access_type = "blob" # TODO: Switch back to "private" later
+  container_access_type = "private"
 }
 
 # A storage blob is akin to a file
@@ -49,7 +30,7 @@ resource "azurerm_storage_blob" "main" {
   source                 = "modules/blob/resources/quotes.json"
 }
 
-/* CA NON PLUSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSs
+
 resource "azurerm_subnet" "blob" {
   name                 = "blob-service-subnet"
   resource_group_name  = var.resource_group_name
@@ -57,6 +38,20 @@ resource "azurerm_subnet" "blob" {
   address_prefixes     = ["10.0.3.0/24"]
 
   service_endpoints = ["Microsoft.Storage"]
+}
+
+/* Tentative de configuration de la sécurité du stockage en passant par un subnet (echec)
+resource "azurerm_storage_account_network_rules" "main" {
+  storage_account_id = azurerm_storage_account.main.id
+
+  default_action     = "Deny"
+  virtual_network_subnet_ids = [azurerm_subnet.blob.id]
+
+  depends_on = [
+    azurerm_storage_account.main,
+    azurerm_storage_blob.main,
+    azurerm_subnet.blob
+  ]
 }
 
 resource "azurerm_subnet_network_security_group_association" "blob" {
