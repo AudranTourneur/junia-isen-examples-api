@@ -39,6 +39,7 @@ module "app" {
   database_port             = var.database_port
   resource_group_name       = azurerm_resource_group.example.name
   storage_blob_url          = module.blob.url
+  storage_account_id        = module.blob.storage_account_id
   virtual_network_subnet_id = azurerm_subnet.app.id
 
   depends_on = [module.database, module.blob, azurerm_subnet.app, azurerm_subnet_network_security_group_association.app]

@@ -40,6 +40,11 @@ variable "storage_blob_url" {
   type    = string
 }
 
+variable "storage_account_id" {
+  default = "The storage account ID, obtainable by a azurerm_storage_account"
+  type    = string
+}
+
 variable "virtual_network_subnet_id" {
   default = "The virtual sub-network ID, obtainable by a azurerm_subnet"
   type    = string

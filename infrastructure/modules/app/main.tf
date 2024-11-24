@@ -3,6 +3,12 @@ resource "random_pet" "prefix" {
   length = 1
 }
 
+resource "random_string" "main" {
+  length  = 24
+  special = false
+  upper   = false
+}
+
 resource "azurerm_service_plan" "main" {
   name                = "${random_pet.prefix.id}-plan"
   resource_group_name = var.resource_group_name
@@ -38,4 +44,10 @@ resource "azurerm_linux_web_app" "main" {
   identity {
     type = "SystemAssigned"
   }
+}
+
+resource "azurerm_role_assignment" "role_assignment" {
+  scope               = var.storage_account_id
+  role_definition_name = "Storage Blob Data Contributor"
+  principal_id        = azurerm_linux_web_app.main.identity[0].principal_id
 }
