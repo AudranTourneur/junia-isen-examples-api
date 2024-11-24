@@ -1,54 +1,69 @@
-# Examples API
+![banner](images/banner.png)
 
-Simple API that returns example records from a database.
+# Introduction
 
-## Prerequisites
+This is a Cloud Computing Project, the team members of this project are:
+- Audran TOURNEUR
+- Iémélian RAMBEAU
+- Judith LECOQ
+- Simon BERNARD DE LAJARTRE
 
-- you need to install [uv](https://docs.astral.sh/uv/guides/install-python/)
-- you must have a PostgreSQL instance available with an `example` table
+# Usage instruction
 
-## Installation
-
-```shell
-# Install Python in the right version
-uv python install
-
-# Install dependencies and create virtual env
-uv sync
+```sh
+git clone https://github.com/AudranTourneur/junia-isen-examples-api
+cd junia-isen-examples-api/infrastructure
+terraform init
+# You may want to set your terraform.tfvars before
+terraform apply
 ```
 
-## Run
+# Local usage
 
-```shell
-# Export environment variables to connect to the PostgreSQL database...
-export DATABASE_HOST=
-export DATABASE_PORT=
-export DATABASE_NAME=
-export DATABASE_USER=
-export DATABASE_PASSWORD='' # Use single quotes to avoid shell interpolation with characters like $ or #
-# ...and the storage account
-export STORAGE_ACCOUNT_URL=
+As an iniative, a `docker-compose.yml` file has been added for local development.
+After setting your `.env` following the `.env.example` file, you will be able to run `docker compose up -d`.
 
-# Run the application
-uv run fastapi dev examples/examples.py
-```
+# Contributing
 
-## Run tests
+- Git commits must be written in English and conform to the [Convential Commit](https://www.conventionalcommits.org/en/v1.0.0/) specification, allowed types are those present in the [Karma specification](https://karma-runner.github.io/6.4/dev/git-commit-msg.html) as well as `ci` and `chore`.
+Additionally, all commits must be cryptographically signed, non-signed commits will be rejected by the GitHub repository rules.
 
-```shell
-uv run pytest tests/
-```
-
-They go on:
-
-- <http://localhost:8000/docs>
-- <http://localhost:8000/>
-- <http://localhost:8000/examples>
-
-## Developpement
-
-To setup the git hooks on linux use :
+To enforce style rules, as an intiative, a commitlint workflow has been created. See `commitLint.yml`.
+Moreover, on a UNIX-like system, you may run the following script to enforce theses rules locally at commit time:
 
 ```shell
 ./git/git-setup
 ```
+
+# Auto-deploy
+
+An automatic workflow has been setup to deploy the application whenever a commit hit the main branch. See `docker-build-and-publish.yml`.
+
+# Tests
+
+A workflow has been setup to run Python tests on commits and pull requests targeting the main branch, see `test.yml`.
+
+# Application demo
+
+## Terraform apply
+
+After running `terraform apply` with the correct variables and waiting about 10 minutes the first time (more or less), terraform should give you the deployed URL as output:
+
+![terraform_apply](images/terraform_apply.png)
+
+## Route /
+
+![route_index](images/route_index.png)
+
+## Route /examples
+
+![route_examples](images/route_examples.png)
+
+This is coming from the Postgres database.
+
+## Route /quotes
+
+![route_quotes](images/route_quotes.png)
+
+This is coming from the Blob storage.
+
