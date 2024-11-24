@@ -1,6 +1,3 @@
-data "azurerm_subscription" "current" {
-}
-
 data "azuread_user" "user" {
   user_principal_name = var.email_address
 }
@@ -17,10 +14,10 @@ module "database" {
   database            = var.database_name
   location            = var.location
   resource_group_name = azurerm_resource_group.example.name
-  private_dns_zone_id = azurerm_private_dns_zone.default.id
-  delegated_subnet_id = azurerm_subnet.database.id
+  private_dns_zone_id = module.network.private_dns_zone_id
+  delegated_subnet_id = module.network.delegated_subnet_id
 
-  depends_on = [azurerm_private_dns_zone_virtual_network_link.default]
+  depends_on = [module.network]
 }
 
 module "blob" {
@@ -40,9 +37,9 @@ module "app" {
   resource_group_name       = azurerm_resource_group.example.name
   storage_blob_url          = module.blob.url
   storage_account_id        = module.blob.storage_account_id
-  virtual_network_subnet_id = azurerm_subnet.app.id
+  virtual_network_subnet_id = module.network.delegated_subnet_id
 
-  depends_on = [module.database, module.blob, azurerm_subnet.app, azurerm_subnet_network_security_group_association.app]
+  depends_on = [module.database, module.blob, module.network]
 }
 
 module "network" {

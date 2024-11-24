@@ -25,6 +25,7 @@ resource "azurerm_linux_web_app" "main" {
     "DATABASE_PASSWORD"   = var.database_password
     "STORAGE_ACCOUNT_URL" = var.storage_blob_url
   }
+  
   virtual_network_subnet_id = var.virtual_network_subnet_id
 
   site_config {
