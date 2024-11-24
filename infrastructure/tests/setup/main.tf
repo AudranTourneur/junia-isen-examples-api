@@ -1,13 +1,13 @@
 terraform {
   required_providers {
     random = {
-      source  = "hashicorp/random"
+      source = "hashicorp/random"
     }
   }
 }
 
 resource "random_pet" "app_name" {
-  length = 2       # Number of words
+  length    = 2 # Number of words
   separator = "-"
 }
 
