@@ -69,3 +69,9 @@ variable "docker_image_name" {
   default     = "audrantourneur/junia-isen-examples-api/cloud-computing-app:latest"
   description = "The Docker image name"
 }
+
+variable "new_relic_license_key" {
+  type        = string
+  sensitive   = true
+  description = "New Relic license key"  
+}

@@ -24,6 +24,8 @@ resource "azurerm_linux_web_app" "main" {
     "DATABASE_USER"       = var.database_username
     "DATABASE_PASSWORD"   = var.database_password
     "STORAGE_ACCOUNT_URL" = var.storage_blob_url
+    "NEW_RELIC_LICENSE_KEY" = var.new_relic_license_key
+    "NEW_RELIC_APP_NAME"    = var.new_relic_app_name
   }
   virtual_network_subnet_id = var.virtual_network_subnet_id
 

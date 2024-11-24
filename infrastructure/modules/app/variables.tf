@@ -59,3 +59,16 @@ variable "docker_image_name" {
   default = "The Docker image name"
   type    = string
 }
+
+variable "new_relic_license_key" {
+  type        = string
+  sensitive   = true
+  description = "New Relic license key"  
+}
+
+variable "new_relic_app_name" {
+  type        = string
+  nullable    = false
+  default     = "cloud-computing-app"
+  description = "New Relic app name"
+}
