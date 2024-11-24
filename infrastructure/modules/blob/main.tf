@@ -16,9 +16,9 @@ resource "azurerm_storage_account" "main" {
 
 # A storage container is akin to a folder
 resource "azurerm_storage_container" "main" {
-  name                  = "content"
+  name                  = "api" # Must precisely match what is defined in the Python application code
   storage_account_id    = azurerm_storage_account.main.id
-  container_access_type = "private"
+  container_access_type = "blob" # TODO: Switch back to "private" later
 }
 
 # A storage blob is akin to a file
