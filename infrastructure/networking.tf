@@ -54,7 +54,6 @@ resource "azurerm_private_dns_zone" "default" {
 
   depends_on = [
     azurerm_subnet_network_security_group_association.database,
-    azurerm_linux_web_app.example,
   ]
 }
 

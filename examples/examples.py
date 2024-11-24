@@ -9,32 +9,34 @@ from azure.core.exceptions import HttpResponseError
 
 from fastapi import FastAPI, HTTPException
 
-logger = logging.getLogger('uvicorn.error')
+logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 app = FastAPI()
 
+logger.info("API is starting up")
+
 @app.get("/")
 def read_root():
-    logger.info("Hit /")
+    logger.debug("Hit /")
     return {"Hello": "World"}
 
 
 def init_db(conn):
     # Open and read the local file "init.sql"
-    file_path = './init.sql'
+    file_path = '/app/examples/init.sql'
 
     with open(file_path, 'r') as file:
         conn.cursor().execute(file.read())
 
 @app.get("/examples")
 def read_examples():
+    logger.debug("Hit /examples")
     try:
-        logger.info("Hit /examples")
         conn = psycopg2.connect(
             host=get_environment_variable("DATABASE_HOST"),
             port=get_environment_variable("DATABASE_PORT", "5432"),
-            database=get_environment_variable("DATABASE_NAME"),
+            database=get_environment_variable("DATABASE_NAME", "postgres"),
             user=get_environment_variable("DATABASE_USER"),
             password=get_environment_variable("DATABASE_PASSWORD"),
             connect_timeout=1,
@@ -42,7 +44,7 @@ def read_examples():
 
         init_db(conn)
         cur = conn.cursor()
-        cur.execute("SELECT * FROM examples")
+        cur.execute("SELECT * FROM example")
         examples = cur.fetchall()
         return {"examples": examples}
     except psycopg2.OperationalError as error:
@@ -61,6 +63,7 @@ def get_environment_variable(key, default=None):
 
 @app.get("/quotes")
 def read_quotes():
+    logger.debug("Hit /quotes")
     try:
         account_url = get_environment_variable("STORAGE_ACCOUNT_URL")
         default_credential = DefaultAzureCredential(process_timeout=2)

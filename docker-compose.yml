@@ -12,6 +12,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    environment:
+      DATABASE_USER: $DATABASE_USER
+      DATABASE_PASSWORD: $DATABASE_PASSWORD
+      DATABASE_HOST: $DATABASE_HOST
     depends_on:
       - db
     ports:

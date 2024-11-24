@@ -8,6 +8,7 @@ WORKDIR /app
 ADD pyproject.toml uv.lock .python-version /app/
 RUN uv sync --frozen
 
+ADD examples/init.sql /app/examples/init.sql
 ADD examples/examples.py /app/examples/examples.py
 
 EXPOSE 80
