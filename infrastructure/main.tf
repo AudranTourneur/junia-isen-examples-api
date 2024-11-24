@@ -15,7 +15,7 @@ module "database" {
   location            = var.location
   resource_group_name = azurerm_resource_group.example.name
   private_dns_zone_id = module.network.private_dns_zone_id
-  delegated_subnet_id = module.network.delegated_subnet_id
+  delegated_subnet_id = module.network.delegated_subnet_id_database
 
   depends_on = [module.network]
 }
@@ -37,7 +37,7 @@ module "app" {
   resource_group_name       = azurerm_resource_group.example.name
   storage_blob_url          = module.blob.url
   storage_account_id        = module.blob.storage_account_id
-  virtual_network_subnet_id = module.network.delegated_subnet_id
+  virtual_network_subnet_id = module.network.delegated_subnet_id_app
 
   depends_on = [module.database, module.blob, module.network]
 }
