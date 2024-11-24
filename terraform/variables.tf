@@ -37,11 +37,13 @@ variable "database_name" {
 variable "database_username" {
   type        = string
   nullable    = false
+  sensitive   = true
   description = "Your database admin username."
 }
 
 variable "database_password" {
   type        = string
   nullable    = false
+  sensitive   = true
   description = "Your database admin password."
 }
