@@ -11,7 +11,7 @@ resource "azurerm_resource_group" "example" {
 }
 
 module "database" {
-  source              = "./database"
+  source              = "./modules/database"
   username            = var.database_username
   password            = var.database_password
   location            = var.location
@@ -19,5 +19,11 @@ module "database" {
   private_dns_zone_id = azurerm_private_dns_zone.default.id
   delegated_subnet_id = azurerm_subnet.database.id
 
-  depends_on = [azurerm_private_dns_zone_virtual_network_link.default ]
+  depends_on = [azurerm_private_dns_zone_virtual_network_link.default]
+}
+
+module "blob" {
+  source              = "./modules/blob"
+  location            = var.location
+  resource_group_name = var.resource_group_name
 }

@@ -18,11 +18,12 @@ resource "azurerm_linux_web_app" "example" {
   service_plan_id               = azurerm_service_plan.example.id
   public_network_access_enabled = true
   app_settings = {
-    "DATABASE_HOST"     = module.database.fqdn
-    "DATABASE_PORT"     = "5432"
-    "DATABASE_NAME"     = "postgres"
-    "DATABASE_USER"     = var.database_username
-    "DATABASE_PASSWORD" = var.database_password
+    "DATABASE_HOST"       = module.database.fqdn
+    "DATABASE_PORT"       = "5432"
+    "DATABASE_NAME"       = "postgres"
+    "DATABASE_USER"       = var.database_username
+    "DATABASE_PASSWORD"   = var.database_password
+    "STORAGE_ACCOUNT_URL" = module.blob.url
   }
   virtual_network_subnet_id = azurerm_subnet.app.id
 

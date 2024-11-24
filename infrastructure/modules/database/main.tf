@@ -13,12 +13,13 @@ resource "azurerm_postgresql_flexible_server" "main" {
   version                       = "16" # Latest stable available PostgreSQL version, we live on the edge
   administrator_login           = var.username
   administrator_password        = var.password
-  storage_mb                    = 32768 # 32GB, the minimum available
+  storage_mb                    = 32768             # 32GB, the minimum available
   sku_name                      = "B_Standard_B1ms" # The cheapest option
   backup_retention_days         = 7
-  public_network_access_enabled = false # The database should never be reachable over the public Internet
+  public_network_access_enabled = false                   # The database should never be reachable over the public Internet
   delegated_subnet_id           = var.delegated_subnet_id # Which subnet should we delegate to the private network
   private_dns_zone_id           = var.private_dns_zone_id # Important so that other services can find us by a private DNS query
+  zone                          = "3"                     # Arbitrary choice
 }
 
 # A Flexible Postgres server may contain many databases, a single one is enough for our application
