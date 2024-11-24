@@ -45,9 +45,8 @@ variable "storage_account_id" {
   type    = string
 }
 
-variable "virtual_network_subnet_id" {
-  default = "The virtual sub-network ID, obtainable by a azurerm_subnet"
-  type    = string
+variable "virtual_network_name" {
+  type = string
 }
 
 variable "docker_registry_url" {
@@ -58,4 +57,8 @@ variable "docker_registry_url" {
 variable "docker_image_name" {
   default = "The Docker image name"
   type    = string
+}
+
+variable "network_security_group_id" {
+  type = string
 }
