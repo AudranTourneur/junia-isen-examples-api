@@ -18,11 +18,11 @@ resource "azurerm_linux_web_app" "example" {
   service_plan_id               = azurerm_service_plan.example.id
   public_network_access_enabled = true
   app_settings = {
-    "DATABASE_HOST"          = azurerm_postgresql_flexible_server.default.fqdn
-    "DATABASE_PORT"          = "5432"
-    "DATABASE_NAME"          = "postgres"
-    "DATABASE_USER"          = var.database_username
-    "DATABASE_PASSWORD"      = var.database_password
+    "DATABASE_HOST"     = azurerm_postgresql_flexible_server.default.fqdn
+    "DATABASE_PORT"     = "5432"
+    "DATABASE_NAME"     = "postgres"
+    "DATABASE_USER"     = var.database_username
+    "DATABASE_PASSWORD" = var.database_password
   }
   virtual_network_subnet_id = azurerm_subnet.app.id
 
@@ -34,5 +34,9 @@ resource "azurerm_linux_web_app" "example" {
     }
   }
 
-  depends_on = [ azurerm_subnet.app, azurerm_subnet_network_security_group_association.app ]
+  identity {
+    type = "SystemAssigned"
+  }
+
+  depends_on = [azurerm_subnet.app, azurerm_subnet_network_security_group_association.app]
 }
