@@ -18,7 +18,7 @@ resource "azurerm_linux_web_app" "example" {
   service_plan_id               = azurerm_service_plan.example.id
   public_network_access_enabled = true
   app_settings = {
-    "DATABASE_HOST"     = azurerm_postgresql_flexible_server.default.fqdn
+    "DATABASE_HOST"     = module.database.fqdn
     "DATABASE_PORT"     = "5432"
     "DATABASE_NAME"     = "postgres"
     "DATABASE_USER"     = var.database_username

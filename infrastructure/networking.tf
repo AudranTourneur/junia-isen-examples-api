@@ -1,3 +1,5 @@
+resource "random_pet" "name_prefix" {}
+
 resource "azurerm_virtual_network" "default" {
   name                = "${random_pet.name_prefix.id}-vnet"
   location            = var.location
