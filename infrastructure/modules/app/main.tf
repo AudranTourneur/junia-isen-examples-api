@@ -39,3 +39,9 @@ resource "azurerm_linux_web_app" "main" {
     type = "SystemAssigned"
   }
 }
+
+resource "azurerm_role_assignment" "role_assignment" {
+  scope               = var.storage_account_id
+  role_definition_name = "Storage Blob Data Contributor"
+  principal_id        = azurerm_linux_web_app.main.identity[0].principal_id
+}
