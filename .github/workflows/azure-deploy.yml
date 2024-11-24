@@ -28,7 +28,9 @@ name: Build and deploy a container to an Azure Web App
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main 
+      - build*
   workflow_dispatch:
 
 permissions:
