@@ -55,8 +55,3 @@ module "network" {
   location            = var.location
   resource_group_name = azurerm_resource_group.example.name
 }
-
-output "url" {
-  description = "The deployed URL of the application"
-  value       = module.app.url
-}
