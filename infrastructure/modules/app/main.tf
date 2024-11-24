@@ -30,8 +30,8 @@ resource "azurerm_linux_web_app" "main" {
   site_config {
     vnet_route_all_enabled = true
     application_stack {
-      docker_registry_url = "https://ghcr.io"
-      docker_image_name   = "audrantourneur/junia-isen-examples-api/cloud-computing-app:latest"
+      docker_registry_url = var.docker_registry_url
+      docker_image_name   = var.docker_image_name
     }
   }
 

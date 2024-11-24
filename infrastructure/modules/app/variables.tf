@@ -49,3 +49,13 @@ variable "virtual_network_subnet_id" {
   default = "The virtual sub-network ID, obtainable by a azurerm_subnet"
   type    = string
 }
+
+variable "docker_registry_url" {
+  default = "The Docker registry URL"
+  type    = string
+}
+
+variable "docker_image_name" {
+  default = "The Docker image name"
+  type    = string
+}
