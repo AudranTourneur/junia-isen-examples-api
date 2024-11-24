@@ -44,6 +44,8 @@ module "app" {
   storage_account_id        = module.blob.storage_account_id
   virtual_network_name      = module.network.virtual_network_name
   network_security_group_id = module.network.network_security_group_id
+  docker_registry_url       = var.docker_registry_url
+  docker_image_name         = var.docker_image_name
 
   depends_on = [module.database, module.blob, module.network]
 }

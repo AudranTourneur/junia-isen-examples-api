@@ -31,8 +31,8 @@ resource "azurerm_linux_web_app" "main" {
   site_config {
     vnet_route_all_enabled = true
     application_stack {
-      docker_registry_url = "https://ghcr.io"
-      docker_image_name   = "audrantourneur/junia-isen-examples-api/cloud-computing-app:latest"
+      docker_registry_url = var.docker_registry_url
+      docker_image_name   = var.docker_image_name
     }
   }
 
@@ -42,9 +42,9 @@ resource "azurerm_linux_web_app" "main" {
 }
 
 resource "azurerm_role_assignment" "role_assignment" {
-  scope               = var.storage_account_id
+  scope                = var.storage_account_id
   role_definition_name = "Storage Blob Data Contributor"
-  principal_id        = azurerm_linux_web_app.main.identity[0].principal_id
+  principal_id         = azurerm_linux_web_app.main.identity[0].principal_id
 }
 
 resource "azurerm_subnet" "app" {

@@ -52,6 +52,20 @@ variable "database_password" {
 variable "database_port" {
   type        = number
   nullable    = false
-  description = "Your database port"
   default     = 5432
+  description = "Your database port"
+}
+
+variable "docker_registry_url" {
+  type        = string
+  nullable    = false
+  default     = "https://ghcr.io"
+  description = "The Docker registry URL"
+}
+
+variable "docker_image_name" {
+  type        = string
+  nullable    = false
+  default     = "audrantourneur/junia-isen-examples-api/cloud-computing-app:latest"
+  description = "The Docker image name"
 }

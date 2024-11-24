@@ -49,6 +49,26 @@ variable "virtual_network_name" {
   type = string
 }
 
+variable "docker_registry_url" {
+  default = "The Docker registry URL"
+  type    = string
+}
+
+variable "docker_image_name" {
+  default = "The Docker image name"
+  type    = string
+}
+
+variable "docker_registry_url" {
+  default = "The Docker registry URL"
+  type    = string
+}
+
+variable "docker_image_name" {
+  default = "The Docker image name"
+  type    = string
+}
+
 variable "network_security_group_id" {
   type = string
 }
