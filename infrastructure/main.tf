@@ -43,6 +43,7 @@ module "app" {
   virtual_network_subnet_id = azurerm_subnet.app.id
   docker_registry_url       = var.docker_registry_url
   docker_image_name         = var.docker_image_name
+  new_relic_license_key     = var.new_relic_license_key
 
   depends_on = [module.database, module.blob, azurerm_subnet.app, azurerm_subnet_network_security_group_association.app]
 }
