@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS example (
 
 INSERT INTO example (name)
 SELECT 'Albert Camus'
-WHERE NOT EXISTS (SELECT 1 FROM example WHERE name = 'Albert Camus');
+WHERE NOT EXISTS (SELECT 1 FROM example WHERE name = 'Albert Camus')
 UNION ALL
 SELECT 'Socrates' 
 WHERE NOT EXISTS (SELECT 1 FROM example WHERE name = 'Socrates')
@@ -35,4 +35,4 @@ SELECT 'Thomas Hobbes'
 WHERE NOT EXISTS (SELECT 1 FROM example WHERE name = 'Thomas Hobbes')
 UNION ALL
 SELECT 'Jean-Paul Sartre'
-WHERE NOT EXISTS (SELECT 1 FROM example WHERE name = 'Jean-Paul Sartre')
+WHERE NOT EXISTS (SELECT 1 FROM example WHERE name = 'Jean-Paul Sartre');
