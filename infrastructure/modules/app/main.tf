@@ -26,7 +26,7 @@ resource "azurerm_linux_web_app" "main" {
     "STORAGE_ACCOUNT_URL" = var.storage_blob_url
   }
   
-  virtual_network_subnet_id = var.virtual_network_subnet_id
+  virtual_network_subnet_id = azurerm_subnet.app.id
 
   site_config {
     vnet_route_all_enabled = true
@@ -45,4 +45,25 @@ resource "azurerm_role_assignment" "role_assignment" {
   scope               = var.storage_account_id
   role_definition_name = "Storage Blob Data Contributor"
   principal_id        = azurerm_linux_web_app.main.identity[0].principal_id
+}
+
+resource "azurerm_subnet" "app" {
+  name                 = "app-service-subnet"
+  resource_group_name  = var.resource_group_name
+  virtual_network_name = var.virtual_network_name
+  address_prefixes     = ["10.0.1.0/24"]
+  delegation {
+    name = "as"
+    service_delegation {
+      name = "Microsoft.Web/serverFarms"
+      actions = [
+        "Microsoft.Network/virtualNetworks/subnets/join/action"
+      ]
+    }
+  }
+}
+
+resource "azurerm_subnet_network_security_group_association" "app" {
+  subnet_id                 = azurerm_subnet.app.id
+  network_security_group_id = var.network_security_group_id
 }

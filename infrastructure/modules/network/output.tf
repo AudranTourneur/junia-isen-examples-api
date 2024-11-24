@@ -3,12 +3,17 @@ output "private_dns_zone_id" {
     value       = azurerm_private_dns_zone.default.id
 }
 
-output "delegated_subnet_id_app" {
-    description = "The ID of the delegated subnet"
-    value       = azurerm_subnet.app.id
+output "virtual_network_name" {
+    description = ""
+    value = azurerm_virtual_network.default.name
 }
 
-output "delegated_subnet_id_database" {
-    description = "The ID of the delegated subnet"
-    value       = azurerm_subnet.database.id
+output "network_security_group_id" {
+    description = ""
+    value = azurerm_network_security_group.default.id
+}
+
+output "private_dns_zone_name" {
+    description = ""
+    value = azurerm_private_dns_zone.default.name
 }

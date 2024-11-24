@@ -17,7 +17,7 @@ resource "azurerm_postgresql_flexible_server" "main" {
   sku_name                      = "B_Standard_B1ms" # The cheapest option
   backup_retention_days         = 7
   public_network_access_enabled = false                   # The database should never be reachable over the public Internet
-  delegated_subnet_id           = var.delegated_subnet_id # Which subnet should we delegate to the private network
+  delegated_subnet_id           = azurerm_subnet.database.id
   private_dns_zone_id           = var.private_dns_zone_id # Important so that other services can find us by a private DNS query
   zone                          = "3"                     # Arbitrary choice
 }
@@ -28,4 +28,29 @@ resource "azurerm_postgresql_flexible_server_database" "main" {
   server_id = azurerm_postgresql_flexible_server.main.id
   collation = "en_US.utf8"
   charset   = "UTF8"
+}
+
+resource "azurerm_subnet" "database" {
+  name                 = "mallard-database-subnet"
+  virtual_network_name = var.virtual_network_name
+  resource_group_name  = var.resource_group_name
+  address_prefixes     = ["10.0.2.0/24"]
+  service_endpoints    = ["Microsoft.Storage"]
+
+  delegation {
+    name = "fs"
+
+    service_delegation {
+      name = "Microsoft.DBforPostgreSQL/flexibleServers"
+
+      actions = [
+        "Microsoft.Network/virtualNetworks/subnets/join/action",
+      ]
+    }
+  }
+}
+
+resource "azurerm_subnet_network_security_group_association" "database" {
+  subnet_id                 = azurerm_subnet.database.id
+  network_security_group_id = var.network_security_group_id
 }

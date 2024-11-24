@@ -25,12 +25,15 @@ variable resource_group_name {
     type = string
 }
 
-variable "delegated_subnet_id" {
-    description = "A delegated sub-network ID, obtainable by a azurerm_subnet"
-    type = string
-}
-
 variable "private_dns_zone_id" {
     description = "A private DNS zone ID, obtainable by a azurerm_private_dns_zone"
     type = string
+}
+
+variable "virtual_network_name" {
+  type = string
+}
+
+variable "network_security_group_id" {
+  type = string
 }

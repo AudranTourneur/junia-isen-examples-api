@@ -15,7 +15,8 @@ module "database" {
   location            = var.location
   resource_group_name = azurerm_resource_group.example.name
   private_dns_zone_id = module.network.private_dns_zone_id
-  delegated_subnet_id = module.network.delegated_subnet_id_database
+  virtual_network_name = module.network.virtual_network_name
+  network_security_group_id = module.network.network_security_group_id
 
   depends_on = [module.network]
 }
@@ -24,6 +25,10 @@ module "blob" {
   source              = "./modules/blob"
   location            = var.location
   resource_group_name = azurerm_resource_group.example.name
+  virtual_network_name = module.network.virtual_network_name
+  network_security_group_id = module.network.network_security_group_id
+  private_dns_zone_name = module.network.private_dns_zone_name
+  private_dns_zone_id = module.network.private_dns_zone_id
 }
 
 module "app" {
@@ -37,7 +42,8 @@ module "app" {
   resource_group_name       = azurerm_resource_group.example.name
   storage_blob_url          = module.blob.url
   storage_account_id        = module.blob.storage_account_id
-  virtual_network_subnet_id = module.network.delegated_subnet_id_app
+  virtual_network_name      = module.network.virtual_network_name
+  network_security_group_id = module.network.network_security_group_id
 
   depends_on = [module.database, module.blob, module.network]
 }
