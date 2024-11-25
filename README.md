@@ -47,6 +47,12 @@ A workflow has been setup to run Python tests on commits and pull requests targe
 
 A test has been added to check that the application returns a HTTP 200 response when deployed. See the `infrastructure/tests` folder.
 
+# New Relic
+
+To monitor the application, New Relic has been set up up, it simply requires the user to provide a License Key obtained from the New Relic portal.
+
+![New Relic](images/new_relic.png)
+
 # Security
 
 Both the database and the blob storage should *not* be accessible from the public Internet. 

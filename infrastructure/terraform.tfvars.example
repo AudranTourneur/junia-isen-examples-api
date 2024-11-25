@@ -1,5 +1,11 @@
-database_username   = "username"
-database_password   = "password"
+# TF VARS
+# Please make sure that your ResourceGroupName is unique enough on the Azure network
+# It will be used as a base to name the web application
+# A name which is not unique enough may fail to create the application.
+
+resource_group_name = "YourCloudComputingProjectName"
+database_username   = "your_postgres_username"
+database_password   = "your_very_strong_postgres_password"
 email_address       = "youremail@example.com"
 subscription_id     = "00000000-00000000-00000000-00000000"
-resource_group_name = "YourCloudComputingProjectName"
+new_relic_license_key = "your_license_key_obtained_from_new_relic"
