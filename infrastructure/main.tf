@@ -48,6 +48,7 @@ module "app" {
   network_security_group_id = module.network.network_security_group_id
   docker_registry_url       = var.docker_registry_url
   docker_image_name         = var.docker_image_name
+  new_relic_license_key     = var.new_relic_license_key
 
   depends_on = [module.database, module.blob, module.network]
 }

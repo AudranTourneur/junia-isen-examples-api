@@ -63,3 +63,8 @@ variable "network_security_group_id" {
   description = "The ID of the network security group to assign to the app"
   type        = string
 }
+
+variable "new_relic_license_key" {
+  description = "The New Relic license key to use for monitoring"
+  type        = string
+}

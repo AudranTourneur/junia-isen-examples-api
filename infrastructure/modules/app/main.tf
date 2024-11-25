@@ -15,12 +15,13 @@ resource "azurerm_linux_web_app" "main" {
   service_plan_id               = azurerm_service_plan.main.id
   public_network_access_enabled = true # required, this is a public facing application
   app_settings = {
-    "DATABASE_HOST"       = var.database_host
-    "DATABASE_PORT"       = var.database_port
-    "DATABASE_NAME"       = var.database_name
-    "DATABASE_USER"       = var.database_username
-    "DATABASE_PASSWORD"   = var.database_password
-    "STORAGE_ACCOUNT_URL" = var.storage_blob_url
+    "DATABASE_HOST"         = var.database_host
+    "DATABASE_PORT"         = var.database_port
+    "DATABASE_NAME"         = var.database_name
+    "DATABASE_USER"         = var.database_username
+    "DATABASE_PASSWORD"     = var.database_password
+    "STORAGE_ACCOUNT_URL"   = var.storage_blob_url
+    "NEW_RELIC_LICENSE_KEY" = var.new_relic_license_key
   }
 
   virtual_network_subnet_id = azurerm_subnet.app.id
