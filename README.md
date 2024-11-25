@@ -25,11 +25,11 @@ After setting your `.env` following the `.env.example` file, you will be able to
 
 # Contributing
 
-- Git commits must be written in English and conform to the [Convential Commit](https://www.conventionalcommits.org/en/v1.0.0/) specification, allowed types are those present in the [Karma specification](https://karma-runner.github.io/6.4/dev/git-commit-msg.html) as well as `ci` and `chore`.
+- Git commits must be written in English and conform to the [Conventional Commit](https://www.conventionalcommits.org/en/v1.0.0/) specification, allowed types are those present in the [Karma specification](https://karma-runner.github.io/6.4/dev/git-commit-msg.html) as well as `ci` and `chore`.
 Additionally, all commits must be cryptographically signed, non-signed commits will be rejected by the GitHub repository rules.
 
-To enforce style rules, as an intiative, a commitlint workflow has been created. See `commitLint.yml`.
-Moreover, on a UNIX-like system, you may run the following script to enforce theses rules locally at commit time:
+To enforce style rules, as an intiative, a CommitLint workflow has been created. See `commitLint.yml`.
+Moreover, on a UNIX-like system, you can run the following script to enforce theses rules locally at commit time:
 
 ```shell
 ./git/git-setup
@@ -51,6 +51,7 @@ A test has been added to check that the application returns a HTTP 200 response 
 
 Both the database and the blob storage should *not* be accessible from the public Internet. 
 Only the application itself is effectively able to access these resources.
+The Postgres database is within a virtual network with the application and the blob storage has been configured to be private, a system-assigned identity is use to access this resource.
 
 # Application demo
 
