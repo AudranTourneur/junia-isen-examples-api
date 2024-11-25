@@ -47,6 +47,11 @@ A workflow has been setup to run Python tests on commits and pull requests targe
 
 A test has been added to check that the application returns a HTTP 200 response when deployed. See the `infrastructure/tests` folder.
 
+# Security
+
+Both the database and the blob storage should *not* be accessible from the public Internet. 
+Only the application itself is effectively able to access these resources.
+
 # Application demo
 
 ## Terraform apply

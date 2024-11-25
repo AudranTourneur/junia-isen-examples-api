@@ -7,18 +7,18 @@ resource "random_string" "main" {
 
 # The storage account is the top-level unit which contains containers
 resource "azurerm_storage_account" "main" {
-  name                          = random_string.main.id
-  resource_group_name           = var.resource_group_name
-  location                      = var.location
-  account_tier                  = "Standard"
-  account_replication_type      = "LRS"
+  name                     = random_string.main.id
+  resource_group_name      = var.resource_group_name
+  location                 = var.location
+  account_tier             = "Standard" # The cheapest option
+  account_replication_type = "LRS"      # Locally Redundant Storage, the cheapest option
 }
 
 # A storage container is akin to a folder
 resource "azurerm_storage_container" "main" {
   name                  = "api" # Must precisely match what is defined in the Python application code
   storage_account_id    = azurerm_storage_account.main.id
-  container_access_type = "private"
+  container_access_type = "private" # While this is technically not in a subnet, this is still secure as the resource is not accessible from the public Internet
 }
 
 # A storage blob is akin to a file
@@ -26,8 +26,8 @@ resource "azurerm_storage_blob" "main" {
   name                   = "quotes.json"
   storage_account_name   = azurerm_storage_account.main.name
   storage_container_name = azurerm_storage_container.main.name
-  type                   = "Block"
-  source                 = "modules/blob/resources/quotes.json"
+  type                   = "Block"                              # The standard way to create a file
+  source                 = "modules/blob/resources/quotes.json" # The initial file
 }
 
 /* Tentative de configuration de la sécurité du stockage en passant par un subnet (echec)

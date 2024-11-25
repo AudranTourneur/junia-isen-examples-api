@@ -36,13 +36,13 @@ variable "resource_group_name" {
 }
 
 variable "storage_blob_url" {
-  default = "The URL of the storage blob container"
-  type    = string
+  description = "The URL of the storage blob container"
+  type        = string
 }
 
 variable "storage_account_id" {
-  default = "The storage account ID, obtainable by a azurerm_storage_account"
-  type    = string
+  description = "The storage account ID, obtainable by a azurerm_storage_account"
+  type        = string
 }
 
 variable "virtual_network_name" {
@@ -50,15 +50,16 @@ variable "virtual_network_name" {
 }
 
 variable "docker_registry_url" {
-  default = "The Docker registry URL"
-  type    = string
+  description = "The Docker registry URL"
+  type        = string
 }
 
 variable "docker_image_name" {
-  default = "The Docker image name"
-  type    = string
+  description = "The Docker image name"
+  type        = string
 }
 
 variable "network_security_group_id" {
-  type = string
+  description = "The ID of the network security group to assign to the app"
+  type        = string
 }

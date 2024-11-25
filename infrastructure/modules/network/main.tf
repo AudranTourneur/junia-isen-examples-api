@@ -1,17 +1,17 @@
 resource "azurerm_virtual_network" "default" {
-  name                = "mallard-vnet" # name is arbitrary
+  name                = "${var.resource_group_name}-vnet"
   location            = var.location
   resource_group_name = var.resource_group_name
   address_space       = ["10.0.0.0/16"]
 }
 
 resource "azurerm_network_security_group" "default" {
-  name                = "mallard-nsg"
+  name                = "${var.resource_group_name}-nsg"
   location            = var.location
   resource_group_name = var.resource_group_name
 
-  # This security rule is coming from the official documentation and allows inbound traffic 
-  # It does NOT expose the database 
+  # This security rule is an example from the official documentation and allows inbound traffic in the subnet 
+  # This is probably too permissive for our usecase but this does NOT expose the database to the public Internet
   security_rule {
     name                       = "main"
     priority                   = 100

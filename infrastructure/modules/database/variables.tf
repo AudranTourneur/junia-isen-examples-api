@@ -31,8 +31,8 @@ variable "private_dns_zone_id" {
 }
 
 variable "virtual_network_name" {
-  default = "The name virtual network to use"
-  type    = string
+  description = "The name virtual network to use"
+  type        = string
 }
 
 variable "network_security_group_id" {

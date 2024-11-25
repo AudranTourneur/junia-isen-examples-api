@@ -16,7 +16,7 @@ resource "azurerm_postgresql_flexible_server" "main" {
   storage_mb                    = 32768             # 32GB, the minimum available
   sku_name                      = "B_Standard_B1ms" # The cheapest option
   backup_retention_days         = 7
-  public_network_access_enabled = false                   # Important: The database should never be reachable over the public Internet
+  public_network_access_enabled = false # Important: The database should never be reachable from the public Internet
   delegated_subnet_id           = azurerm_subnet.database.id
   private_dns_zone_id           = var.private_dns_zone_id # Important so that other services can find us by a private DNS query
   zone                          = "3"                     # Arbitrary choice
@@ -30,8 +30,9 @@ resource "azurerm_postgresql_flexible_server_database" "main" {
   charset   = "UTF8"
 }
 
+# Just like the app, this is a managed service so we need to "delegate" the subnet to Microsoft
 resource "azurerm_subnet" "database" {
-  name                 = "mallard-database-subnet"
+  name                 = "${var.resource_group_name}-database-subnet"
   virtual_network_name = var.virtual_network_name
   resource_group_name  = var.resource_group_name
   address_prefixes     = ["10.0.2.0/24"]
@@ -50,6 +51,7 @@ resource "azurerm_subnet" "database" {
   }
 }
 
+# This exists to link our subnet to our Network Security Group
 resource "azurerm_subnet_network_security_group_association" "database" {
   subnet_id                 = azurerm_subnet.database.id
   network_security_group_id = var.network_security_group_id
